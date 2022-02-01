@@ -13,8 +13,14 @@ import {
 } from "@material-ui/core/styles";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { CryptoState } from "../CryptoContext";
 
 const Header = () => {
+  // import the state from  use context in CryptoState, which is being exported from CryptoContext.js
+  const { currency, setCurrency } = CryptoState();
+
+  console.log(currency);
+
   const useStyles = makeStyles({
     title: {
       flex: 1,
@@ -57,6 +63,8 @@ const Header = () => {
                 height: 40,
                 marginRight: 15,
               }}
+              value={currency}
+              onChange={(e) => setCurrency(e.target.value)}
             >
               <MenuItem value={"USD"}>USD</MenuItem>
               <MenuItem value={"EUR"}>EUR</MenuItem>
