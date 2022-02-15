@@ -54,7 +54,7 @@ const Header = () => {
               className={classes.title}
               variant="h6"
             >
-              Crypto Currency
+              Crypto Tracker
             </Typography>
             <Select
               variant="outlined"

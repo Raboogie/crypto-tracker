@@ -1,14 +1,10 @@
-import {
-  capitalize,
-  Container,
-  makeStyles,
-  Typography,
-} from "@material-ui/core";
+import { Container, makeStyles, Typography } from "@material-ui/core";
 import React from "react";
+import Carousel from "./Carousel";
 
 const useStyles = makeStyles(() => ({
   banner: {
-    backgroundImage: "url(./banner2.jpg)",
+    backgroundImage: "url(./banner9.jpg)",
   },
   bannerContent: {
     height: 400,
@@ -55,6 +51,7 @@ const Banner = () => {
             Get all the Info regarding your favorite Crypto Currency
           </Typography>
         </div>
+        <Carousel />
       </Container>
     </div>
   );
