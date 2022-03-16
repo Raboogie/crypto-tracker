@@ -18,7 +18,7 @@ import {
   ThemeProvider,
   Typography,
 } from "@material-ui/core";
-import { Navigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { numberWithCommas } from "./Banner/Carousel";
 import { Pagination } from "@material-ui/lab";
 
@@ -28,6 +28,9 @@ const CoinsTable = () => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const { currency, symbol } = CryptoState();
+
+  let navigate = useNavigate();
+  const handleTableClick = () => {};
 
   const fetchCoins = async () => {
     setLoading(true);
@@ -124,7 +127,7 @@ const CoinsTable = () => {
                     const profit = row.price_change_percentage_24h > 0;
                     return (
                       <TableRow
-                        nClick={() => Navigate.push(`/coins/${row.id}`)}
+                        onClick={() => navigate(`/coin/${row.id}`)}
                         className={classes.row}
                         key={row.name}
                       >
