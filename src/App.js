@@ -22,7 +22,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="coin/:id/*" element={<CoinPage />} />
+          <Route path="coin/:id/" element={<CoinPage />} />
         </Routes>
       </div>
     </BrowserRouter>
