@@ -8,9 +8,29 @@ import {
   makeStyles,
   ThemeProvider,
 } from "@material-ui/core";
+import { CryptoState } from "../CryptoContext";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 import SelectButton from "./SelectButton";
 import { chartDays } from "../config/data";
-import { CryptoState } from "../CryptoContext";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const CoinInfo = ({ coin }) => {
   const [historicData, setHistoricData] = useState();
@@ -40,14 +60,16 @@ const CoinInfo = ({ coin }) => {
 
   const fetchHistoricData = async () => {
     const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
-    setflag(true);
+    //setflag(true);
     setHistoricData(data.prices);
   };
+
+  console.log("data", historicData);
 
   useEffect(() => {
     fetchHistoricData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [days]);
+  }, [currency, days]);
 
   const darkTheme = createTheme({
     palette: {
@@ -58,7 +80,43 @@ const CoinInfo = ({ coin }) => {
     },
   });
 
-  return <div></div>;
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <div className={classes.container}>
+        <h1>Coin Info Page</h1>
+        {!historicData ? (
+          <CircularProgress
+            style={{ color: "gold" }}
+            size={250}
+            thickness={1}
+          />
+        ) : (
+          <>
+            <Line
+              data={{
+                labels: historicData.map((coin) => {
+                  let date = new Date(coin[0]);
+                  let time =
+                    date.getHours() > 12
+                      ? `${date.getHours() - 12}:${date.getMinutes()} PM`
+                      : `${date.getHours()}:${date.getMinutes()} AM`;
+                  return days === 1 ? time : date.toLocaleDateString();
+                }),
+
+                datasets: [
+                  {
+                    data: historicData.map((coin) => coin[1]),
+                    label: `Price ( Past ${days} Days ) in ${currency}`,
+                    borderColor: "#EEBC1D",
+                  },
+                ],
+              }}
+            />
+          </>
+        )}
+      </div>
+    </ThemeProvider>
+  );
 };
 
 export default CoinInfo;
