@@ -18,7 +18,7 @@ import {
   ThemeProvider,
   Typography,
 } from "@material-ui/core";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { numberWithCommas } from "./Banner/Carousel";
 import { Pagination } from "@material-ui/lab";
 
@@ -68,7 +68,7 @@ const CoinsTable = () => {
     },
     pagination: {
       "& .MuiPaginationItem-root": {
-        color: "gold",
+        color: "#2FA4FF",
       },
     },
   });
@@ -100,10 +100,10 @@ const CoinsTable = () => {
         />
         <TableContainer>
           {loading ? (
-            <LinearProgress style={{ backgroundColor: "gold" }} />
+            <LinearProgress style={{ backgroundColor: "#2FA4FF" }} />
           ) : (
             <Table>
-              <TableHead style={{ backgroundColor: "#EEBC1D" }}>
+              <TableHead style={{ backgroundColor: "#2FA4FF" }}>
                 <TableRow>
                   {["Coin", "Price", "24h Change", "Market Cap"].map((head) => (
                     <TableCell

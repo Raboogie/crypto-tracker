@@ -19,12 +19,10 @@ const Header = () => {
   // import the state from  use context in CryptoState, which is being exported from CryptoContext.js
   const { currency, setCurrency } = CryptoState();
 
-  console.log(currency);
-
   const useStyles = makeStyles({
     title: {
       flex: 1,
-      color: "gold",
+      color: "#2FA4FF",
       fontFamily: "Montserrat",
       fontWeight: "bold",
       cursor: "pointer",
